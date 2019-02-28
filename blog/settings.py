@@ -121,5 +121,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'Dashboard'
+LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = '/'
+
+MEDIA_ROOT = '/home/arun/arun-backup-data/blog'
+MEDIA_URL = '/upload/images/'

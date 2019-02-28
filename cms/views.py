@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import DetailView, ListView
+from taggit.models import Tag
+from .models import BlogPost
 from cms.forms import SignUpForm
-# Create your views here.
 
 
-def signup(request):
+def Signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -20,10 +22,35 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 
-def home(request):
-    return render(request, 'cms/home.html')
+class TagMixin(object):
+    def get_context_data(self, **kwargs):
+        context = super(TagMixin, self).get_context_data(**kwargs)
+        context['tags'] = Tag.objects.all()
+        return context
 
 
-@login_required
-def dashboard(request):
-    return render(request, 'cms/dashboard.html')
+class PostIndex(TagMixin, ListView):
+    template_name = 'cms/index.html'
+    model = BlogPost
+    paginate_by = '10'
+    queryset = BlogPost.objects.all()
+    context_object_name = 'blogposts'
+
+
+class TagIndexView(TagMixin, ListView):
+    template_name = 'cms/index.html'
+    model = BlogPost
+    paginate_by = '10'
+    context_object_name = 'blogposts'
+
+    def get_queryset(self):
+        return BlogPost.objects.filter(tags__slug=self.kwargs.get('slug'))
+
+
+class UserPostList(LoginRequiredMixin, ListView):
+    model = BlogPost
+    template_name = 'cms/dashboard.html'
+    context_object_name = 'all_posts_by_user'
+
+    def get_queryset(self):
+        return BlogPost.objects.filter(author=self.request.user)

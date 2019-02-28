@@ -3,5 +3,29 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-  <h1>Hello you are authenticated to view dashboard.</h1>
+<div class="jumbotron">
+  <h2 class="text-center text-capitalize">welcome <span class="dash-user">"{{ user.username }}"</span> here are the post's made by you.</h2>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>POST TITLE</th>
+      <th>IMAGE</th>
+      <th>CATEGORY</th>
+      <th>LOCATION</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for each in all_posts_by_user %}
+    <tr>
+      <th class="text-uppercase">{{ each.page_title }}</th>
+      <th><img alt="blogImage" height="50" src="{{ MEDIA_URL }}{{ each.image.url }}"/></th>
+      <th class="text-uppercase">{{ each.category }}</th>
+      <th class="text-uppercase">{{ each.location }}</th>
+    </tr>
+    {% empty %}
+       <tr class="text-center">Sorry, no post is made by you.</tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
