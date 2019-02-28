@@ -29,8 +29,10 @@
 	pip install -r requirements.txt
 	Create the migrations.
 
-    **Note**: Everything works out of the box with this project. But Because of the uploaded images part, you need to set the value of MEDIA_ROOT and MEDIA_URL according to your system
-to run locally.
+ ## Note: 
+ 	Everything works out of the box with this project. 
+	But Because of the uploaded images part, you need to set.
+	The value of MEDIA_ROOT and MEDIA_URL according to your system to run locally.
 
 
 
