@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <img class="banner-img" alt="banner" src="{{ MEDIA_URL }}{{ blogpost.image.url }}"/>
+  <h1 class="text-center text-capitalize post-title">{{ blogpost.page_title }}</h1>
+</div>
+<div class="row">
+  <p class="post-text text-justify">
+    {{ blogpost.content }}
+  </p>
+</div>
+<div class="row info-row">
+  <span class="text-uppercase btn btn-default">{{ blogpost.category }}</span>
+  <span class="text-uppercase pull-right btn btn-default">{{ blogpost.location }}</span>
+</div>
+{% endblock %}

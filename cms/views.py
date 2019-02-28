@@ -60,3 +60,7 @@ class BlogPostCreate(LoginRequiredMixin, CreateView):
     model = BlogPost
     fields = '__all__'
     success_url = '/dashboard'
+
+
+class BlogPostDetail(DetailView):
+    model = BlogPost
