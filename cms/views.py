@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import DetailView, ListView
-from taggit.models import Tag
-from .models import BlogPost
+from django.views.generic import DetailView, ListView, CreateView
 from cms.forms import SignUpForm
+from taggit.models import Tag
+from cms.models import BlogPost
 
 
 def Signup(request):
@@ -16,7 +16,7 @@ def Signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('home')
+            return redirect('dashboard')
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
@@ -54,3 +54,9 @@ class UserPostList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return BlogPost.objects.filter(author=self.request.user)
+
+
+class BlogPostCreate(LoginRequiredMixin, CreateView):
+    model = BlogPost
+    fields = '__all__'
+    success_url = '/dashboard'

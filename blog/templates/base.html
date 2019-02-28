@@ -12,17 +12,18 @@
 	  body{
 	      background: #F6F6F6;
 	      font-family: 'Open Sans', sans-serif;
+	      font-weight: 400;
 	  }
 	  .navbar-default{
 	      background: #fff;
 	      border: none;
 	      border-bottom: 2px solid #eee;
 	  }
-	  #form-container{
+	  .form-container{
 	      margin-left: auto;
 	      margin-right: auto;
-	      width: 600px;
-	      margin-top: 15%;
+	      width: 800px;
+	      margin-top: 5%;
 	      border: 2px solid #d3d3d3;
 	      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 	      padding: 20px;
@@ -53,6 +54,9 @@
 	  .dash-user{
 	      color: #fa3756;
 	  }
+	  .form-btn{
+	      width: 100%;
+	  }
 	</style>
     </head>
     <body>
@@ -66,17 +70,20 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">WHATSHOT</a>
+                    <a class="navbar-brand" href="{% url 'blogposts' %}">WHATSHOT</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
-                            <li class="dropdown">
+                           <li class="dropdown">
                               <a href="#" class="dropdown-toggle text-uppercase" data-toggle="dropdown"><strong>{{ user.username }}</strong><b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+                              <ul class="dropdown-menu">
+				  <li><a href="{% url 'blogposts' %}">WEBSITE</a></li>
+				  <li><a href="{% url 'dashboard' %}">DASHBOARD</a></li>
+				  <li><a href="{% url 'create' %}">NEW POST</a></li>
+                                  <li><a href="{% url 'logout' %}">LOGOUT</a></li>
                                 </ul>
                             </li>
                         {% else %}
