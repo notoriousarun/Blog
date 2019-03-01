@@ -20,7 +20,7 @@
 	* Blog Listing
 	* Header
 	* Full-text Search(TODO)
-	* Blog Page of spcific post(TODO)
+	* Blog Page of spcific post
 
 ## Getting Started with the Project
 	Clone the repository
